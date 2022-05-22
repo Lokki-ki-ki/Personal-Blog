@@ -3,7 +3,7 @@ import { auth } from "../firebase";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
 } from "firebase/auth";
 
 export default createStore({
@@ -14,7 +14,7 @@ export default createStore({
         setUser(state, payload) {
             state.user = payload;
             console.log("user state change", state.user);
-        }
+        },
     },
     actions: {
         async signup(context, { email, password }) {
@@ -38,18 +38,18 @@ export default createStore({
                     password
                 );
                 context.commit("setUser", response.user);
-                alert("Welcome!")
+                alert("Welcome!");
             } catch (error) {
                 throw new Error(error.code);
             }
         },
 
         async logout(context) {
-          console.log('log out')
+            console.log("log out");
 
-          await signOut(auth)
-          context.commit('setUser', null)
-        }
+            await signOut(auth);
+            context.commit("setUser", null);
+        },
     },
     modules: {},
 });
